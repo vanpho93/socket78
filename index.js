@@ -15,6 +15,15 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
+  // socket.leave(socket.id, function(){
+  //   console.log(socket.rooms);
+  // });
+
+  socket.on("check", function(){
+    console.log(JSON.stringify(socket.rooms));
+  });
+
+  console.log(socket.rooms);
   socket.on('NEW_USERNAME', function(data){
     if(arrayUsername.indexOf(data) == -1){
       arrayUsername.push(data);
@@ -27,9 +36,19 @@ io.on('connection', function(socket){
   socket.on('NEW_ROOM', function(data){
     if(arrayRoom.indexOf(data) == -1){
       arrayRoom.push(data);
+      socket.join(data, function(){
+        console.log(socket.rooms);
+      });
       socket.emit('XAC_NHAN_TAO_ROOM', {xacNhan: 1, tenRoom: data});
+      io.emit('NEW_ROOM_ACCEPT', data);
     }else{
       socket.emit('XAC_NHAN_TAO_ROOM', {xacNhan: 0, tenRoom: data});
     }
+  });
+
+  socket.on('CLIENT_JOIN_ROOM', function(data){
+    socket.join(data, function(){
+      console.log(socket.rooms);
+    });
   });
 });
