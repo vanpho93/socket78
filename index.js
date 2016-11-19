@@ -8,10 +8,19 @@ app.set('views', './views');
 app.use(express.static('public'));
 server.listen(3000);
 
+var arrayUsername = [];
+
 app.get('/', function(req, res){
   res.render('homepage');
 });
 
 io.on('connection', function(socket){
-  console.log('Ket noi thanh cong');
+  socket.on('NEW_USERNAME', function(data){
+    if(arrayUsername.indexOf(data) == -1){
+      arrayUsername.push(data);
+      socket.emit('XAC_NHAN_DANG_KY', 1);
+    }else{
+      socket.emit('XAC_NHAN_DANG_KY', 0);
+    }
+  });
 });

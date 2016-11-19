@@ -7,8 +7,22 @@
         <script src="jquery-3.1.1.js"></script>
         <script type="text/javascript">
             var socket = io("http://localhost:3000");
+
             $(document).ready(function() {
-                alert('load xong');
+                socket.on('XAC_NHAN_DANG_KY', function(data){
+                  if(data == 0){
+                    alert("Username da ton tai");
+                  }else{
+                    $("#div-dang-ky").hide();
+                    $('#div-tao-room').show();
+                    alert("Dang ky thanh cong");
+                  }
+                });
+
+                $('#div-tao-room').hide();
+                $('#btnDangky').click(function(){
+                  socket.emit('NEW_USERNAME', $('#txtUsername').val());
+                });
             });
         </script>
         <style>
@@ -28,7 +42,7 @@
                 <input type="text" id="txtUsername" placeholder="Enter your username"/><br><br>
                 <button id="btnDangky">Sign in</button>
             </div>
-            <div id="div-tao_room">
+            <div id="div-tao-room">
                 <input type="text" id="txtRoom" placeholder="Create new room"/><br><br>
                 <button id="btnCreate">Create</button>
             </div>
