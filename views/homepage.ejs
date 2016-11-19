@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Socket.io Node.js</title>
-    <script src="socket.io/socket.io.js"></script>
-    <script type="text/javascript">
-      var socket = io("http://localhost:3000");
-    </script>
-  </head>
-  <body>
-
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <title>Socket.io Node.js</title>
+        <script src="socket.io/socket.io.js"></script>
+        <script src="jquery-3.1.1.js"></script>
+        <script type="text/javascript">
+            var socket = io("http://localhost:3000");
+            $(document).ready(function() {
+                alert('load xong');
+            });
+        </script>
+    </head>
+    <body>
+        <div id="div-control" style="float: left">
+            <div id="div-dang-ky">
+                <input type="text" id="txtUsername" placeholder="Enter your username"/><br><br>
+                <button id="btnDangky">Sign in</button>
+            </div>
+            <div id="div-tao_room">
+                <input type="text" id="txtRoom" placeholder="Create new room"/><br><br>
+                <button id="btnCreate">Create</button>
+            </div>
+            <ul id="list-room">
+                <li>Room 1</li>
+                <li>Room 2</li>
+                <li>Room 3</li>
+            </ul>
+        </div>
+        <div id="chat" style="background-color: yellow">
+          <ul id="list-message">
+            <li>Room 1</li>
+            <li>Room 2</li>
+            <li>Room 3</li>
+            <li>Room 1</li>
+            <li>Room 2</li>
+            <li>Room 3</li>
+          </ul>
+          <input type="text" id="txtMessage" placeholder="Enter your message"/>
+          <button id="btnSend">Send</button>
+        </div>
+    </body>
 </html>
