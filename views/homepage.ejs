@@ -18,11 +18,24 @@
                     alert("Dang ky thanh cong");
                   }
                 });
+                socket.on('XAC_NHAN_TAO_ROOM', function(data){
+                  if(data.xacNhan == 0){
+                    alert('Room nay da ton tai');
+                  }else{
+                    alert('Tao room thanh cong');
+                    $('#div-tao-room').hide();
+                    $('#list-room').append(`<li>${data.tenRoom}</li>`);
+                  }
+                });
 
                 $('#div-tao-room').hide();
                 $('#btnDangky').click(function(){
                   socket.emit('NEW_USERNAME', $('#txtUsername').val());
                 });
+                $('#btnCreate').click(function(){
+                  socket.emit('NEW_ROOM', $('#txtRoom').val());
+                });
+
             });
         </script>
         <style>

@@ -9,7 +9,7 @@ app.use(express.static('public'));
 server.listen(3000);
 
 var arrayUsername = [];
-
+var arrayRoom = [];
 app.get('/', function(req, res){
   res.render('homepage');
 });
@@ -21,6 +21,15 @@ io.on('connection', function(socket){
       socket.emit('XAC_NHAN_DANG_KY', 1);
     }else{
       socket.emit('XAC_NHAN_DANG_KY', 0);
+    }
+  });
+
+  socket.on('NEW_ROOM', function(data){
+    if(arrayRoom.indexOf(data) == -1){
+      arrayRoom.push(data);
+      socket.emit('XAC_NHAN_TAO_ROOM', {xacNhan: 1, tenRoom: data});
+    }else{
+      socket.emit('XAC_NHAN_TAO_ROOM', {xacNhan: 0, tenRoom: data});
     }
   });
 });
