@@ -51,4 +51,8 @@ io.on('connection', function(socket){
       console.log(socket.rooms);
     });
   });
+
+  socket.on('NEW_MESSAGE', function(data){
+    console.log(data);
+  });
 });
