@@ -11,8 +11,18 @@
                 alert('load xong');
             });
         </script>
+        <style>
+          #chat{
+            padding: 5px;
+          }
+          #div-control{
+            padding: 10px;
+            background-color: green;
+          }
+        </style>
     </head>
     <body>
+      <div id="wrapper" style="float: left">
         <div id="div-control" style="float: left">
             <div id="div-dang-ky">
                 <input type="text" id="txtUsername" placeholder="Enter your username"/><br><br>
@@ -28,7 +38,7 @@
                 <li>Room 3</li>
             </ul>
         </div>
-        <div id="chat" style="background-color: yellow">
+        <div id="chat" style="background-color: yellow; float: left">
           <ul id="list-message">
             <li>Room 1</li>
             <li>Room 2</li>
@@ -40,5 +50,6 @@
           <input type="text" id="txtMessage" placeholder="Enter your message"/>
           <button id="btnSend">Send</button>
         </div>
+      </div>
     </body>
 </html>
