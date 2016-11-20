@@ -10,6 +10,9 @@
             var socket = io("http://localhost:3000");
 
             $(document).ready(function() {
+                socket.on('SERVER_GUI_TIN_NHAN', function(data){
+                  alert(data);
+                });
                 socket.on('NEW_ROOM_ACCEPT', function(data){
                   $('#list-room').append(`<li class="room-name">${data}</li>`);
                 });
@@ -34,12 +37,10 @@
                     currentRoom = $(this).text();
                     socket.emit('CLIENT_JOIN_ROOM', $(this).text());
                 });
-
                 $('#btnSend').click(function(){
                   socket.emit('NEW_MESSAGE',
                     {roomName: currentRoom, msg: $('#txtMessage').val()});
                 });
-
                 $('#div-tao-room').hide();
                 $('#btnDangky').click(function(){
                   socket.emit('NEW_USERNAME', $('#txtUsername').val());

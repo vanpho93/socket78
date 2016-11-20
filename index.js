@@ -53,6 +53,6 @@ io.on('connection', function(socket){
   });
 
   socket.on('NEW_MESSAGE', function(data){
-    console.log(data);
+    io.to(data.roomName).emit('SERVER_GUI_TIN_NHAN', data.msg);
   });
 });
